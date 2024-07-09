@@ -1,0 +1,163 @@
+.major {
+  display: flex;
+  flex-direction: column;
+  width: 75%; /* Rộng */
+  margin-left: 10px;
+  border-radius: 15px; /* Bo góc */
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 700px;
+  margin-top: 40px;
+}
+
+.line {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.line1 {
+  margin-left: -1px;
+  margin-top: 25px;
+  width: 50%;
+  display: flex;
+}
+
+.lineItem {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.lineItem2 {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.labelContent {
+  font-family: Montserrat;
+  font-size: 15px;
+  height: 15px;
+  background-color: rgba(217, 217, 217, 0.3);
+  border: 1px solid rgba(61, 54, 54, 0.25);
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.containerBtn {
+  position: absolute;
+  top: 790px;
+  right: 50px;
+}
+
+.btn {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 50px;
+  width: 90px;
+  color: white;
+  background-color: #0083c2;
+  border-color: #0083c2;
+  border-radius: 10px;
+}
+
+.loading {
+  margin-bottom: 100%;
+}
+
+/* mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .major {
+    border: none;
+    margin-left: 0;
+    width: calc(100% - 40px);
+    gap: 30px;
+    min-height: 500px;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 64em) and (max-width: 64.0625em) {
+  .major {
+    min-height: 835px;
+  }
+  /* .email{
+        width: 25%;
+    }
+
+    .diachi{
+        width: 39%;
+    }
+
+    .lineItem>label{
+        font-size: unset !important;
+    } */
+
+  .lineItem2 > label {
+    font-size: 15px !important;
+  }
+
+  .lineItem > label {
+    font-size: 15px !important;
+  }
+}
+
+@media screen and (min-width: 48em) and (max-width: 64em) {
+  /* .email{
+        width: 25%;
+    }
+
+    .diachi{
+        width: 39%;
+    }
+    */
+
+  .line {
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .line1 {
+    margin-top: 0;
+  }
+
+  .lineItem {
+    width: 25%;
+  }
+
+  .lineItem > label {
+    font-size: 12px;
+  }
+
+  .lineItem2 {
+    width: 25%;
+  }
+
+  .lineItem2 > label {
+    font-size: 12px;
+  }
+}
+
+/* mobile and small tablet */
+@media screen and (max-width: 37.5em) {
+  .line {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .lineItem {
+    width: 100%;
+  }
+
+  .line1 {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .lineItem2 {
+    width: 100%;
+  }
+}

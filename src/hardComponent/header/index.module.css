@@ -1,0 +1,203 @@
+.navLink {
+  height: 100%;
+  line-height: 50px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.navLink > div > svg {
+  display: none;
+}
+
+.btnLog {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  /* margin-bottom: 50px; */
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.divLog {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.imgAvatar {
+  vertical-align: middle;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #00000029;
+}
+
+.imgLogo {
+  width: 150px;
+  height: 90px;
+  object-fit: scale-down;
+}
+
+.title {
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+}
+
+.uniName {
+  font-size: 16px;
+  color: white;
+}
+
+.navMobile {
+  display: none;
+  height: 100%;
+  line-height: 50px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.navBar {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  box-shadow: 3px 3px rgb(0, 0, 0, 15%);
+  width: 100%;
+  gap: 70px;
+}
+
+.divLog>div{
+  gap: 20px;
+}
+
+/* Mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .btnLog {
+    display: none;
+  }
+
+  .navLink > div > svg {
+    display: block;
+  }
+
+  .navMobile {
+    display: block;
+  }
+
+  .navBar {
+    justify-content: space-around;
+    gap: unset;
+    box-shadow: none;
+    border-top: 1px solid rgba(10, 10, 10, 0.07);
+    background-color: white;
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .navBar > div {
+    width: 20%;
+    padding: 3px;
+  }
+
+  .divLog{
+    display: none;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .navBar{
+    height: 70px;
+  }
+
+  /* .imgLogo {
+    width: 200px;
+  } */
+
+  /* .title {
+    font-size: 20px;
+  } */
+
+  .uniName {
+    font-size: 16px;
+  }
+
+  .navLink {
+    line-height: 30px;
+  }
+
+  .navLink > div > svg {
+    font-size: 30px;
+  }
+
+  .navLink > p {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .navMobile {
+    line-height: 30px;
+  }
+
+  .navMobile > div > svg {
+    font-size: 30px;
+  }
+
+  .navMobile > p {
+    font-size: 18px;
+    text-align: center;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 46.1875em) {
+  .imgLogo {
+    width: 100px;
+  }
+
+  .title {
+    font-size: 10px;
+  }
+
+  .uniName {
+    font-size: 8px;
+  }
+
+  .navLink {
+    line-height: 20px;
+  }
+
+  .navLink > div > svg {
+    font-size: 25px;
+  }
+
+  .navLink > p {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .navMobile {
+    line-height: 20px;
+  }
+
+  .navMobile > div > svg {
+    font-size: 25px;
+  }
+
+  .navMobile > p {
+    font-size: 10px;
+    text-align: center;
+  }
+}

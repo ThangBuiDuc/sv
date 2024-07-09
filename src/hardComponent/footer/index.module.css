@@ -1,0 +1,45 @@
+.wrapFooter {
+  height: 240px;
+  width: 100%;
+  background-color: #0083c2;
+}
+
+.wrapFooter > div {
+  align-self: center;
+  width: 30%;
+}
+
+.wrapFooter > p {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  font-size: 16px;
+  color: white;
+}
+
+/* tablet */
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrapFooter {
+    margin-bottom: 71px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 46.1875em) {
+  .wrapFooter {
+    padding-top: 10px;
+    flex-direction: column;
+    gap: 20px;
+    height: fit-content;
+    margin-bottom: 51px;
+  }
+
+  .wrapFooter > div {
+    width: 90%;
+  }
+
+  .wrapFooter > p {
+    position: unset;
+    margin-left: 5px;
+  }
+}

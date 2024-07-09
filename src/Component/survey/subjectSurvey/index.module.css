@@ -1,0 +1,88 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin-left: 10px;
+  border-radius: 15px;
+  padding: 20px;
+  gap: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 700px;
+  margin-top: 40px;
+}
+/* 
+.connectText::after{
+    content: "\00a0-\00a0";
+} */
+
+.title {
+  font-size: 24px;
+  color: #0083c2;
+}
+
+.subject {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  align-items: center;
+}
+
+/* mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .wrap {
+    border: none;
+    margin-left: 0;
+    width: calc(100% - 40px);
+    gap: 30px;
+    min-height: 500px;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrap {
+    min-height: 835px;
+  }
+}
+
+/* mobile and small tablet */
+@media screen and (max-width: 37.5em) {
+  .line {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .lineItem {
+    width: 100%;
+  }
+
+  .lineItem2 {
+    width: 100%;
+  }
+
+  .subject,
+  .radio {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .subject > p {
+    width: 100% !important;
+  }
+
+  .subject p {
+    text-align: center;
+  }
+
+  .subTitle {
+    font-size: 16px !important;
+  }
+
+  .radio {
+    gap: 20px;
+  }
+
+  .radio > div {
+    gap: 15px;
+  }
+}

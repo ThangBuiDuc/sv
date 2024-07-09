@@ -1,0 +1,200 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin-left: 10px;
+  border-radius: 15px;
+  padding: 20px;
+  gap: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 700px;
+  margin-top: 40px;
+}
+
+.wrapHeaderTable {
+  background-color: #c6e0c4;
+}
+
+.wrapHeaderTable > tr > th {
+  border: 1px solid #0083c2;
+}
+
+.wrapBodyTable > tr > td {
+  border-right: 1px solid #0083c2;
+  border-left: 1px solid #0083c2;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+/* mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .wrap {
+    border: none;
+    margin-left: 0;
+    width: calc(100% - 40px);
+    gap: 30px;
+    min-height: 500px;
+  }
+
+  .wrap > table {
+    font-size: 13px;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrap {
+    min-height: 835px;
+  }
+}
+
+/* mobile */
+@media screen and (max-width: 46.1875em) {
+  .container {
+    justify-content: center;
+    float: unset;
+  }
+
+  .bangdiem {
+    margin-top: 0;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+  /* .wrap>table{
+        font-size: 70%;
+    }
+
+    .wrapHeaderTable>tr>th{
+        padding: 2px;
+    } */
+
+  .wrapBodyTable > tr :first-child {
+    border-top: 1px solid #0083c2;
+  }
+
+  .wrap > table {
+    display: block;
+  }
+
+  .wrapHeaderTable {
+    display: block;
+  }
+
+  .wrapBodyTable {
+    display: block;
+  }
+
+  .wrapHeaderTable > tr {
+    display: block;
+  }
+
+  .wrapBodyTable > tr {
+    display: block;
+  }
+
+  .wrapBodyTable > tr > td {
+    display: block;
+  }
+
+  .wrapHeaderTable > tr > th {
+    display: block;
+  }
+
+  /* table, thead, tbody, th, td, tr { 
+		display: block; 
+	} */
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .wrapHeaderTable tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .wrapHeaderTable tr {
+    border: 1px solid #ccc;
+  }
+
+  .wrapBodyTable tr {
+    border: 1px solid #ccc;
+  }
+
+  .wrapBodyTable tr td {
+    /* Behave  like a "row" */
+    padding: unset;
+    /* border: none; */
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 60%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 45px;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .wrapBodyTable tr td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  /*
+	Label the data
+	*/
+  .wrapBodyTable tr td:nth-of-type(1):before {
+    content: "STT";
+  }
+  .wrapBodyTable tr td:nth-of-type(2):before {
+    content: "Tên khoản";
+  }
+  .wrapBodyTable tr td:nth-of-type(3):before {
+    content: "Số tiền quy định";
+  }
+  .wrapBodyTable tr td:nth-of-type(4):before {
+    content: "Số tiền thay đổi";
+  }
+  .wrapBodyTable tr td:nth-of-type(5):before {
+    content: "Số tiền miễn giảm";
+  }
+  .wrapBodyTable tr td:nth-of-type(6):before {
+    content: "Số tiền kỳ trước chuyển sang";
+  }
+  .wrapBodyTable tr td:nth-of-type(7):before {
+    content: "Số tiền đã thu";
+  }
+  .wrapBodyTable tr td:nth-of-type(8):before {
+    content: "Số tiền phải chi";
+  }
+  .wrapBodyTable tr td:nth-of-type(9):before {
+    content: "Số tiền đã chi";
+  }
+  .wrapBodyTable tr td:nth-of-type(10):before {
+    content: "Số tiền chuyển sang kỳ sau";
+  }
+  .wrapBodyTable tr td:nth-of-type(11):before {
+    content: "Số tiền thiếu";
+  }
+
+  .select {
+    margin-top: 0;
+  }
+}
+
+/* small mobile */
+@media screen and (max-width: 20em) {
+  .title {
+    font-size: 15px;
+  }
+}

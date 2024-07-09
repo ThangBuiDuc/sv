@@ -1,0 +1,91 @@
+.wrapPaper {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin-left: 10px;
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 700px;
+  margin-top: 40px;
+}
+.danop {
+  flex-direction: column;
+  width: 97%;
+  height: 45%;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.chuanop {
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  width: 97%;
+  height: 45%;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.line {
+  display: flex;
+  /* margin-top: -10%;
+    margin-left: -10%; */
+  flex-direction: column;
+  width: 100%;
+  color: #0083c2;
+}
+
+.line2 {
+  font-size: 18px;
+  /* margin-left: -8%; */
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.bn {
+  background-color: #0083c2;
+  border: 1px solid rgba(10, 1, 40, 0.25);
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 15px;
+  width: 9%;
+  margin-right: 45px;
+  font-weight: 700;
+  color: white;
+  float: right;
+}
+
+/* mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .wrapPaper {
+    border: none;
+    margin-left: 0;
+    width: calc(100% - 40px);
+    gap: 30px;
+    min-height: 500px;
+  }
+}
+
+/* mobile */
+@media screen and (max-width: 46.1875em) {
+  .line2 {
+    font-size: 15px;
+  }
+}
+
+/* small mobile */
+@media screen and (max-width: 20em) {
+  .line {
+    font-size: 18px;
+  }
+
+  .line2 {
+    font-size: 15px;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrapPaper {
+    min-height: 835px;
+  }
+}

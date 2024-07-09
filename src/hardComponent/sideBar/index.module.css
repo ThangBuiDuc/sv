@@ -1,0 +1,146 @@
+.wrapSideBar {
+  width: 300px;
+  min-height: 700px;
+  margin-left: 15px;
+  margin-top: 40px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rootNavItem {
+  border: none;
+  font-weight: bold;
+  background-color: transparent;
+  cursor: pointer;
+  width: 90%;
+  height: fit-content;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: left;
+  border-radius: 5px;
+  color: black;
+  display: flex;
+  align-content: center;
+}
+
+.rootNavItem:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.modal:checked ~ div {
+  display: flex;
+  /* transform: translateX(0%) */
+  /* transition: linear 0.2s; */
+  right: 0;
+  transition: 0.5s linear;
+}
+
+.modal:checked ~ label {
+  display: block;
+  animation: fadeIn linear 0.5s;
+}
+
+.divLog {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.imgAvatar {
+  vertical-align: middle;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #00000029;
+  object-fit: cover;
+}
+
+.btnLog {
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  /* margin-bottom: 50px; */
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+/* mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .wrapSideBar {
+    /* display: none; */
+    position: fixed;
+    background-color: white;
+    margin-top: 0px !important;
+    margin-left: 0px;
+    right: -76%;
+    /* right: 0; */
+    top: 0;
+    margin-bottom: 70px;
+    z-index: 11;
+    min-height: unset;
+    border-radius: 0;
+    overflow-y: scroll;
+    width: 75%;
+    /* transform: translateX(-100vh); */
+    transition: 0.5s linear;
+  }
+
+  .divLog {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .wrapSideBar > div {
+    padding: 10px;
+    padding-left: 20px;
+  }
+
+  .divLog {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.064);
+    margin-right: 0px;
+  }
+
+  .divLog > div {
+    gap: 10px;
+  }
+
+  .blur {
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 64.0625em) {
+  .wrapSideBar {
+    height: calc(100% - 51px);
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrapSideBar {
+    width: 40%;
+    height: calc(100% - 71px);
+    right: -41%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

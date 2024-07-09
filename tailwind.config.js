@@ -1,10 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const { nextui } = require("@nextui-org/react");
 
 module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/tailwind-datepicker-react/dist/**/*.js",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   daisyui: {
     themes: [
@@ -67,5 +69,6 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  darkMode: "class",
+  plugins: [require("daisyui"), nextui()],
 };

@@ -1,0 +1,72 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin-left: 10px;
+  margin-top: 40px;
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 700px;
+  gap: 20px;
+}
+
+.des {
+  /* css mo ta bai bao*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  margin-left: 20px;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.article {
+  display: flex;
+  height: fit-content;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.article > img {
+  object-fit: cover;
+  height: auto;
+  width: 250px !important;
+}
+
+.article > div > a > h3 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+/* mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .wrapper {
+    border: none;
+    margin-left: 0;
+    width: calc(100% - 40px);
+    min-height: 500px;
+  }
+}
+
+/* mobile */
+@media screen and (max-width: 46.1875em) {
+  .article {
+    flex-direction: column;
+  }
+
+  .article > img {
+    object-fit: cover;
+    height: 200px;
+    width: 100% !important;
+  }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrapper {
+    min-height: 835px;
+  }
+}
