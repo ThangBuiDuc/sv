@@ -172,7 +172,7 @@ const Handle = ({ bank, unSubmitted, hocky }) => {
   //   console.log(selectedKeys.has("CN-GT"));
   return (
     <>
-      <div className="flex gap-10 w-full">
+      <div className="flex gap-10 w-full flex-col md:flex-row">
         <RadioGroup
           label="Lựa chọn cách nộp tiền"
           value={selected}
@@ -195,81 +195,91 @@ const Handle = ({ bank, unSubmitted, hocky }) => {
           ))}
         </Select>
       </div>
-      <Table
-        color="primary"
-        aria-label="Bảng những khoản còn thiếu"
-        isHeaderSticky
-        isStriped
-        selectionMode={selected === "manual" ? "multiple" : "none"}
-        selectedKeys={selectedKeys}
-        onSelectionChange={setSelectedKeys}
-      >
-        <TableHeader>
-          <TableColumn>STT</TableColumn>
-          <TableColumn>Tên khoản</TableColumn>
-          <TableColumn>Số tiền quy định</TableColumn>
-          <TableColumn>Số tiền thay đổi</TableColumn>
-          <TableColumn>Số tiền miễn giảm</TableColumn>
-          <TableColumn>Số tiền kỳ trước chuyển sang</TableColumn>
-          <TableColumn>Số tiền đã thu</TableColumn>
-          <TableColumn>Số tiền phải chi</TableColumn>
-          <TableColumn>Số tiền đã chi</TableColumn>
-          <TableColumn>Số tiền chuyển sang kỳ sau</TableColumn>
-          <TableColumn>Số tiền thiếu</TableColumn>
-        </TableHeader>
-        <TableBody>
-          {unSubmitted.map((item, index) => (
-            <TableRow key={item.maKhoanThu.trim()}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{item.khoan_thu.Ten.trim()}</TableCell>
-              <TableCell>{numberWithCommas(item.soTienQuyDinh)}</TableCell>
-              <TableCell>{numberWithCommas(item.SoTienThayDoi)}</TableCell>
-              <TableCell>{numberWithCommas(item.soTienMienGiam)}</TableCell>
-              <TableCell>
-                {numberWithCommas(item.SoTienKyTruocChuyenSang)}
-              </TableCell>
-              <TableCell>{numberWithCommas(item.SoTienDaThu)}</TableCell>
-              <TableCell>{numberWithCommas(item.SoTienPhaiChi)}</TableCell>
-              <TableCell>{numberWithCommas(item.SoTienDaChi)}</TableCell>
-              <TableCell>
-                {numberWithCommas(item.SoTienChuyenSangKySau)}
-              </TableCell>
-              <TableCell>{numberWithCommas(item.thieu)}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <div className="flex flex-col gap-2">
+        <h5 className="font-normal text-sm md:text-lg">
+          Tổng số tiền phải đóng:{" "}
+          <span className="font-semibold">{numberWithCommas(total)}đ</span>
+        </h5>
+        <Table
+          color="primary"
+          aria-label="Bảng những khoản còn thiếu"
+          isHeaderSticky
+          isStriped
+          selectionMode={selected === "manual" ? "multiple" : "none"}
+          selectedKeys={selectedKeys}
+          onSelectionChange={setSelectedKeys}
+          className="w-full"
+        >
+          <TableHeader>
+            <TableColumn>STT</TableColumn>
+            <TableColumn>Tên khoản</TableColumn>
+            {/* <TableColumn>Số tiền quy định</TableColumn> */}
+            {/* <TableColumn>Số tiền thay đổi</TableColumn>
+            <TableColumn>Số tiền miễn giảm</TableColumn>
+            <TableColumn>Số tiền kỳ trước chuyển sang</TableColumn>
+            <TableColumn>Số tiền đã thu</TableColumn>
+            <TableColumn>Số tiền phải chi</TableColumn>
+            <TableColumn>Số tiền đã chi</TableColumn>
+            <TableColumn>Số tiền chuyển sang kỳ sau</TableColumn> */}
+            <TableColumn>Số tiền thiếu</TableColumn>
+          </TableHeader>
+          <TableBody>
+            {unSubmitted.map((item, index) => (
+              <TableRow key={item.maKhoanThu.trim()}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{item.khoan_thu.Ten.trim()}</TableCell>
+                {/* <TableCell>{numberWithCommas(item.soTienQuyDinh)}</TableCell> */}
+                {/* <TableCell>{numberWithCommas(item.SoTienThayDoi)}</TableCell>
+                <TableCell>{numberWithCommas(item.soTienMienGiam)}</TableCell>
+                <TableCell>
+                  {numberWithCommas(item.SoTienKyTruocChuyenSang)}
+                </TableCell>
+                <TableCell>{numberWithCommas(item.SoTienDaThu)}</TableCell>
+                <TableCell>{numberWithCommas(item.SoTienPhaiChi)}</TableCell>
+                <TableCell>{numberWithCommas(item.SoTienDaChi)}</TableCell>
+                <TableCell>
+                  {numberWithCommas(item.SoTienChuyenSangKySau)}
+                </TableCell> */}
+                <TableCell>{numberWithCommas(item.thieu)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
       <div className="flex flex-col">
-        <h5>Tổng số tiền phải đóng: {numberWithCommas(total)}đ</h5>
-        <h5>Tổng số tiền phải đóng bằng chữ: {getText(total)} đồng</h5>
+        {/* <h5>Tổng số tiền phải đóng bằng chữ: {getText(total)} đồng</h5> */}
 
         {selected === "manual" ? (
-          <h5>
-            Tổng số tiền phải đóng cho lần thanh toán này:{" "}
-            {numberWithCommas(
-              unSubmitted.reduce(
-                (total, curr) =>
-                  selectedKeys === "all"
-                    ? total + curr.thieu
-                    : selectedKeys.has(curr.maKhoanThu.trim())
-                    ? total + curr.thieu
-                    : total,
-                0
-              )
-            )}{" "}
-            đ
+          <h5 className="font-normal text-sm md:text-lg">
+            Tổng số tiền phải đóng lần này:{" "}
+            <span className="font-semibold">
+              {numberWithCommas(
+                unSubmitted.reduce(
+                  (total, curr) =>
+                    selectedKeys === "all"
+                      ? total + curr.thieu
+                      : selectedKeys.has(curr.maKhoanThu.trim())
+                      ? total + curr.thieu
+                      : total,
+                  0
+                )
+              )}{" "}
+              đ
+            </span>
           </h5>
         ) : (
           <>
-            <div className="flex gap-2 items-center w-full">
-              <h5>Tổng số tiền phải đóng cho lần thanh toán này:</h5>
+            <div className="flex gap-2 md:items-center w-full md:flex-row flex-col">
+              <h5 className="font-normal text-sm text-left md:text-lg">
+                Tổng số tiền phải đóng lần này:
+              </h5>
               <Input
                 label="Tổng tiền"
                 variant="bordered"
                 type="number"
                 placeholder="Nhập số tiền cần thanh toán tự động"
-                className="w-[50%]"
+                className="md:w-[50%]"
                 value={amount}
                 onValueChange={(e) => setAmount(e > total ? total : e)}
                 endContent={

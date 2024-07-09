@@ -6,7 +6,10 @@ function UnSubmitted() {
   return (
     <div className={style.wrap}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <h2 className={style.title} style={{ color: "#0083C2" }}>
+        <h2
+          className={`${style.title} text-[16px]`}
+          style={{ color: "#0083C2" }}
+        >
           Các khoản còn thiếu trong học kỳ
         </h2>
       </div>

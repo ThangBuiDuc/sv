@@ -34,7 +34,7 @@ td {
   .wrap {
     border: none;
     margin-left: 0;
-    width: calc(100% - 40px);
+    width: 100vw;
     gap: 30px;
     min-height: 500px;
   }
