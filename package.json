@@ -11,6 +11,7 @@
     "vercel": "vercel dev --listen 3001"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.8",
     "@clerk/clerk-react": "^4.10.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
@@ -28,6 +29,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "framer-motion": "^11.2.13",
+    "graphql-ws": "^5.16.0",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "moment": "^2.29.4",
@@ -48,6 +50,7 @@
     "react-toastify": "^9.1.1",
     "react-use-measure": "^2.1.1",
     "recharts": "^2.1.16",
+    "sonner": "^1.5.0",
     "sweetalert2": "^11.7.3",
     "vercel": "^34.3.0"
   },

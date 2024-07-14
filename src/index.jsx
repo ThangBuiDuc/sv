@@ -7,20 +7,26 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextUIProvider } from "@nextui-org/react";
+import { Toaster } from "sonner";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
+// const client = createApolloClient();
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <NextUIProvider>
+      {/* <ApolloProvider client={client}> */}
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <App />
+          <Toaster position="top-center" richColors closeButton />
         </BrowserRouter>
       </QueryClientProvider>
+      {/* </ApolloProvider> */}
     </NextUIProvider>
   </React.StrictMode>
 );

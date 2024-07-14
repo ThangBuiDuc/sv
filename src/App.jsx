@@ -10,6 +10,9 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
+import client from "./apolloClient";
+// import { useAuth } from "@clerk/clerk-react";
 import React, {
   Suspense,
   useState,
@@ -97,6 +100,8 @@ function Hard() {
 }
 
 function ClerkProviderWithRoutes({ location }) {
+  // const { getToken } = useAuth();
+  // const client = createApolloClient(getToken);
   return (
     <Routes>
       {/* <Route path="/login" element={<Login />} /> */}
@@ -570,7 +575,9 @@ function ClerkProviderWithRoutes({ location }) {
                     </div>
                   }
                 >
-                  <UnSubmitted />
+                  <ApolloProvider client={client}>
+                    <UnSubmitted />
+                  </ApolloProvider>
                 </Suspense>
               </SignedIn>
               <SignedOut>

@@ -2,7 +2,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/react";
 import { RadioGroup, Radio } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Select, SelectItem } from "@nextui-org/select";
 import {
   Table,
@@ -20,7 +20,10 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import { getText } from "number-to-text-vietnamese";
+// import { getText } from "number-to-text-vietnamese";
+import { toast } from "sonner";
+import { useSubscription, gql } from "@apollo/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -66,7 +69,8 @@ async function getBank() {
   return res.json();
 }
 
-const Handle = ({ bank, unSubmitted, hocky }) => {
+const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
+  const client = useQueryClient();
   const { user } = useUser();
   const { getToken } = useAuth();
   const [selected, setSelected] = useState("manual");
@@ -76,7 +80,47 @@ const Handle = ({ bank, unSubmitted, hocky }) => {
   const [amount, setAmount] = useState(0);
   const [invoice, setInvoice] = useState(null);
   const [mutating, setMutating] = useState(false);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  const liveInvoice = useSubscription(gql`
+    subscription MySubscription {
+      invoice(
+        where: {
+          status_id: { _eq: 2 }
+          hoc_ky: { _eq: ${hocky[0].HocKy} }
+          nam_hoc: { _eq: "${hocky[0].MaNamHoc}" }
+          student_code: {_eq: "${user.publicMetadata.masv}"}
+        }
+      ) {
+        uuid
+        status_id
+      }
+    }
+  `);
+  // const liveInvoice = useSubscription(gql`
+  //   subscription MySubscription {
+  //     bank {
+  //       name
+  //     }
+  //   }
+  // `);
+  // console.log(invoice);
+  // console.log(liveInvoice);
+
+  useEffect(() => {
+    if (
+      liveInvoice.data?.invoice.some(
+        (item) => item.uuid === invoice?.invoice_uuid && item.status_id === 2
+      )
+    ) {
+      client.invalidateQueries(["unsubmited"]);
+      onClose();
+      toast.success("Thanh toán thành công!");
+      setInvoice(null);
+    }
+  }, [liveInvoice]);
+
+  // client.query();
 
   const mutation = useMutation({
     mutationFn: async (data) => createInvoice(data.invoice, data.token),
@@ -84,9 +128,11 @@ const Handle = ({ bank, unSubmitted, hocky }) => {
       setMutating(false);
       setInvoice(res);
       onOpen();
+      // toast.success("Đã có lỗi xảy ra. Vui lòng thử lại!");
     },
     onError: (_) => {
       setMutating(false);
+      toast.error("Đã có lỗi xảy ra. Vui lòng thử lại!");
     },
   });
 
@@ -223,7 +269,11 @@ const Handle = ({ bank, unSubmitted, hocky }) => {
             <TableColumn>Số tiền chuyển sang kỳ sau</TableColumn> */}
             <TableColumn>Số tiền thiếu</TableColumn>
           </TableHeader>
-          <TableBody>
+          <TableBody
+            emptyContent="Sinh viên hiện tại không có khoản cần đóng!"
+            isLoading={isRefetching}
+            loadingContent={<Spinner />}
+          >
             {unSubmitted.map((item, index) => (
               <TableRow key={item.maKhoanThu.trim()}>
                 <TableCell>{index + 1}</TableCell>
@@ -296,7 +346,7 @@ const Handle = ({ bank, unSubmitted, hocky }) => {
         ) : (
           <Button
             isDisabled={
-              selected === "manual"
+              isRefetching || selected === "manual"
                 ? selectedKeys.size === 0
                   ? true
                   : false
@@ -367,8 +417,10 @@ const Content = () => {
   if (unSubmitted.isError || bank.isError)
     return <h5 className="text-center">Đã có lỗi xảy ra. Vui lòng thử lại!</h5>;
 
+  // console.log(unSubmitted.data.hocky);
   return (
     <Handle
+      isRefetching={unSubmitted.isRefetching}
       hocky={unSubmitted.data.hocky}
       bank={bank.data.results}
       unSubmitted={unSubmitted.data.khoan
