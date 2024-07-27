@@ -115,7 +115,10 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
     ) {
       client.invalidateQueries(["unsubmited"]);
       onClose();
-      toast.success("Thanh toán thành công!");
+      toast.success("Thanh toán thành công!", {
+        duration: Infinity,
+        important: true,
+      });
       setInvoice(null);
     }
   }, [liveInvoice]);
@@ -132,7 +135,10 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
     },
     onError: (_) => {
       setMutating(false);
-      toast.error("Đã có lỗi xảy ra. Vui lòng thử lại!");
+      toast.error("Đã có lỗi xảy ra. Vui lòng thử lại!", {
+        duration: Infinity,
+        important: true,
+      });
     },
   });
 
