@@ -22,7 +22,6 @@ import {
 } from "@nextui-org/react";
 // import { getText } from "number-to-text-vietnamese";
 import { toast } from "sonner";
-import { useSubscription, gql } from "@apollo/client";
 import { useQueryClient } from "@tanstack/react-query";
 
 function numberWithCommas(x) {
@@ -76,49 +75,68 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
   const [selected, setSelected] = useState("manual");
   const [value, setValue] = useState(new Set(["HDBank"]));
   const total = unSubmitted.reduce((total, curr) => total + curr.thieu, 0);
-  const [selectedKeys, setSelectedKeys] = useState(new Set([]));
+  const [selectedKeys, setSelectedKeys] = useState("all");
   const [amount, setAmount] = useState(0);
   const [invoice, setInvoice] = useState(null);
   const [mutating, setMutating] = useState(false);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-
-  const liveInvoice = useSubscription(gql`
-    subscription MySubscription {
-      invoice(
-        where: {
-          status_id: { _eq: 2 }
-          hoc_ky: { _eq: ${hocky[0].HocKy} }
-          nam_hoc: { _eq: "${hocky[0].MaNamHoc}" }
-          student_code: {_eq: "${user.publicMetadata.masv}"}
-        }
-      ) {
-        uuid
-        status_id
-      }
-    }
-  `);
-  // const liveInvoice = useSubscription(gql`
-  //   subscription MySubscription {
-  //     bank {
-  //       name
-  //     }
-  //   }
-  // `);
-  // console.log(invoice);
-  // console.log(liveInvoice);
+  const [messages, setMessages] = useState();
 
   useEffect(() => {
-    if (
-      liveInvoice.data?.invoice.some(
-        (item) => item.uuid === invoice?.invoice_uuid && item.status_id === 2
-      )
-    ) {
-      client.invalidateQueries(["unsubmited"]);
-      onClose();
-      toast.success("Thanh toán thành công!");
-      setInvoice(null);
+    const socket = new WebSocket("wss://api.hpu.edu.vn");
+
+    socket.addEventListener("open", () => {
+      console.log("WebSocket connection established");
+    });
+
+    socket.addEventListener("message", (event) => {
+      const data = JSON.parse(event.data);
+
+      // Update the state with the new message
+      setMessages(data);
+    });
+
+    socket.addEventListener("close", () => {
+      console.log("WebSocket connection closed");
+    });
+
+    socket.addEventListener("error", (error) => {
+      console.error("WebSocket error:", error);
+    });
+
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (messages) {
+      if (messages.uuid === invoice?.invoice_uuid) {
+        if (messages.edu_status_id === 2) {
+          client.invalidateQueries(["unsubmited"]);
+          onClose();
+          toast.success("Thanh toán thành công!", {
+            duration: Infinity,
+            important: true,
+          });
+          setInvoice(null);
+        }
+
+        // if (messages.status_id === 2 && messages.edu_status_id !== 2) {
+        //   client.invalidateQueries(["unsubmited"]);
+        //   onClose();
+        //   toast.error(
+        //     "Thanh toán thành công nhưng hệ thống đã gặp lỗi trong quá trình gạch nợ!",
+        //     {
+        //       duration: Infinity,
+        //       important: true,
+        //     }
+        //   );
+        //   setInvoice(null);
+        // }
+      }
     }
-  }, [liveInvoice]);
+  }, [messages]);
 
   // client.query();
 
@@ -132,7 +150,10 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
     },
     onError: (_) => {
       setMutating(false);
-      toast.error("Đã có lỗi xảy ra. Vui lòng thử lại!");
+      toast.error("Đã có lỗi xảy ra. Vui lòng thử lại!", {
+        duration: Infinity,
+        important: true,
+      });
     },
   });
 
@@ -219,7 +240,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
   return (
     <>
       <div className="flex gap-10 w-full flex-col md:flex-row">
-        <RadioGroup
+        {/* <RadioGroup
           label="Lựa chọn cách nộp tiền"
           value={selected}
           onValueChange={setSelected}
@@ -227,7 +248,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
         >
           <Radio value="manual">Thủ công</Radio>
           <Radio value="auto">Tự động</Radio>
-        </RadioGroup>
+        </RadioGroup> */}
         <Select
           label="Ngân hàng"
           variant="bordered"
@@ -251,9 +272,9 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
           aria-label="Bảng những khoản còn thiếu"
           isHeaderSticky
           isStriped
-          selectionMode={selected === "manual" ? "multiple" : "none"}
-          selectedKeys={selectedKeys}
-          onSelectionChange={setSelectedKeys}
+          // selectionMode={selected === "manual" ? "multiple" : "none"}
+          // selectedKeys={selectedKeys}
+          // onSelectionChange={setSelectedKeys}
           className="w-full"
         >
           <TableHeader>
