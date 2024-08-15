@@ -90,7 +90,6 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
     });
 
     socket.addEventListener("message", (event) => {
-      console.log("Message from server:", event.data);
       const data = JSON.parse(event.data);
 
       // Update the state with the new message
@@ -110,21 +109,10 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
     };
   }, []);
 
-  console.log(messages);
-  // const liveInvoice = useSubscription(gql`
-  //   subscription MySubscription {
-  //     bank {
-  //       name
-  //     }
-  //   }
-  // `);
-  console.log(invoice);
-  // console.log(liveInvoice);
-
   useEffect(() => {
     if (messages) {
       if (messages.uuid === invoice?.invoice_uuid) {
-        if (messages.status_id === 2) {
+        if (messages.edu_status_id === 2) {
           client.invalidateQueries(["unsubmited"]);
           onClose();
           toast.success("Thanh toán thành công!", {
