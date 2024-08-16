@@ -287,6 +287,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
   };
 
   // console.log(toNonAccentVietnamese(user.publicMetadata.fullname));
+  console.log(unSubmitted);
   return (
     <>
       <div className="flex gap-10 w-full flex-col md:flex-row">
@@ -412,25 +413,29 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
             </div>
           </>
         )}
-        {mutating ? (
-          <Spinner className="self-center mt-4" />
+        {unSubmitted.length > 0 ? (
+          mutating ? (
+            <Spinner className="self-center mt-4" />
+          ) : (
+            <Button
+              isDisabled={
+                isRefetching || selected === "manual"
+                  ? selectedKeys.size === 0
+                    ? true
+                    : false
+                  : amount > 0
+                  ? false
+                  : true
+              }
+              color="primary"
+              className="w-fit self-center mt-4"
+              onClick={() => handleOnClick()}
+            >
+              Thanh toán
+            </Button>
+          )
         ) : (
-          <Button
-            isDisabled={
-              isRefetching || selected === "manual"
-                ? selectedKeys.size === 0
-                  ? true
-                  : false
-                : amount > 0
-                ? false
-                : true
-            }
-            color="primary"
-            className="w-fit self-center mt-4"
-            onClick={() => handleOnClick()}
-          >
-            Thanh toán
-          </Button>
+          <></>
         )}
       </div>
       <Modal
