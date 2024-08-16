@@ -287,7 +287,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
   };
 
   // console.log(toNonAccentVietnamese(user.publicMetadata.fullname));
-  console.log(unSubmitted);
+  // console.log(unSubmitted);
   return (
     <>
       <div className="flex gap-10 w-full flex-col md:flex-row">
@@ -301,6 +301,11 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
           <Radio value="auto">Tự động</Radio>
         </RadioGroup> */}
         <Select
+          errorMessage={
+            value.size > 0 ? "" : "Vui lòng chọn ngân hàng cần thanh toán!"
+          }
+          isInvalid={value.size > 0 ? false : true}
+          isRequired
           label="Ngân hàng"
           variant="bordered"
           selectedKeys={value}
@@ -413,7 +418,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
             </div>
           </>
         )}
-        {unSubmitted.length > 0 ? (
+        {unSubmitted.length > 0 && value.size > 0 ? (
           mutating ? (
             <Spinner className="self-center mt-4" />
           ) : (
