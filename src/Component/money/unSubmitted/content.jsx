@@ -247,9 +247,9 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
         ),
         transactionDescription: `${
           user.publicMetadata.masv
-        } - ${toNonAccentVietnamese(user.publicMetadata.fullname)}`,
+        } ${toNonAccentVietnamese(user.publicMetadata.fullname)}`,
         EduTransactionDescription: invoice_detail
-          .map((item) => `${item.ten.trim()}: ${item.amount}`)
+          .map((item) => `${item.ten.trim()}: ${numberWithCommas(item.amount)}`)
           .join("; "),
         detail: invoice_detail.map((item) => ({
           revenue_code: item.revenue_code,
