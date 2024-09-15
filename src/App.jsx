@@ -10,9 +10,6 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-// import { ApolloProvider } from "@apollo/client";
-// import client from "./apolloClient";
-// import { useAuth } from "@clerk/clerk-react";
 import React, {
   Suspense,
   useState,
@@ -39,18 +36,18 @@ import SignUp from "./hardComponent/signUp";
 //ForgotPass
 import ResetPass from "./hardComponent/resetPass";
 
-// Navigation bar
+///////////////////////////////////////////////////////////////////////////// Navigation bar
 const Announcement = React.lazy(() => import("./Component/announcement"));
 const QandA = React.lazy(() => import("./Component/Q&A"));
 const HomePage = React.lazy(() => import("./Component/homePage"));
-// Hoc tap
+///////////////////////////////////////////////////////////////////////////// Hoc tap
 const Program = React.lazy(() => import("././Component/study/program"));
 const AVG = React.lazy(() => import("././Component/study/avg"));
 const Owe = React.lazy(() => import("././Component/study/owe"));
 // const Graduation = React.lazy(() => import("./Component/study/graduation"));
 // const Scholarship = React.lazy(() => import("./Component/study/scholarship"));
 const Score = React.lazy(() => import("./Component/study/score"));
-const TrainScore = React.lazy(() => import("./Component/study/trainScore"));
+// const TrainScore = React.lazy(() => import("./Component/study/trainScore"));
 const Warning = React.lazy(() => import("./Component/study/warning"));
 // Tai chinh
 const Submitted = React.lazy(() => import("./Component/money/submitted"));
@@ -60,21 +57,30 @@ const Subject = React.lazy(() => import("./Component/money/subject"));
 //   import("./Component/money/unSubmittedSubSession")
 // );
 // const Dormitory = React.lazy(() => import("./Component/money/dormitory"));
-// So yeu ly lich
+///////////////////////////////////////////////////////////////////////////////// So yeu ly lich
 const UserInfor = React.lazy(() =>
   import("./Component/resume/userInformation")
 );
 const Major = React.lazy(() => import("./Component/resume/major"));
 const Family = React.lazy(() => import("./Component/resume/family"));
 const Paper = React.lazy(() => import("./Component/resume/paper"));
-// Lich
+//////////////////////////////////////////////////////////////////////////////////// Lich
 const CalendarStudy = React.lazy(() => import("./Component/calendar/study"));
 const CalendarTest = React.lazy(() => import("./Component/calendar/test"));
 
-//Thu vien
-const LibrarySearch = React.lazy(() => import("./Component/library/search"));
+//////////////////////////////////////////////////////////////////////////////////// Lich
+const TrainScoreLegacy = React.lazy(() =>
+  import("./Component/trainScore/trainScoreLegacy")
+);
 
-//Khao Sat
+const SelfTest = React.lazy(() => import("./Component/trainScore/selfTest"));
+const MonitorTest = React.lazy(() =>
+  import("./Component/trainScore/monitorTest")
+);
+//Thu vien
+// const LibrarySearch = React.lazy(() => import("./Component/library/search"));
+
+//////////////////////////////////////////////////////////////////////////////////////Khao Sat
 const SubjectSurvey = React.lazy(() =>
   import("./Component/survey/subjectSurvey")
 );
@@ -90,7 +96,10 @@ function Hard() {
   return (
     <>
       <Header />
-      <div style={{ display: "flex" }} className={"wrapbody"}>
+      <div
+        style={{ display: "flex", gap: "10px", padding: "15px" }}
+        className={"wrapbody"}
+      >
         <SideBar />
         <Outlet />
       </div>
@@ -100,8 +109,6 @@ function Hard() {
 }
 
 function ClerkProviderWithRoutes({ location }) {
-  // const { getToken } = useAuth();
-  // const client = createApolloClient(getToken);
   return (
     <Routes>
       {/* <Route path="/login" element={<Login />} /> */}
@@ -458,33 +465,6 @@ function ClerkProviderWithRoutes({ location }) {
           }
         />
 
-        <Route
-          path="/study/trainscore"
-          element={
-            <>
-              <SignedIn>
-                <Suspense
-                  fallback={
-                    <div className="loading">
-                      <ReactLoading
-                        type="spin"
-                        color="#0083C2"
-                        width={"50px"}
-                        height={"50px"}
-                      />
-                    </div>
-                  }
-                >
-                  <TrainScore />
-                </Suspense>
-              </SignedIn>
-              <SignedOut>
-                <RedirectToSignIn />
-              </SignedOut>
-            </>
-          }
-        />
-
         {/* <Route
          path="/study/scholarship"
          element={
@@ -575,9 +555,7 @@ function ClerkProviderWithRoutes({ location }) {
                     </div>
                   }
                 >
-                  {/* <ApolloProvider client={client}> */}
                   <UnSubmitted />
-                  {/* </ApolloProvider> */}
                 </Suspense>
               </SignedIn>
               <SignedOut>
@@ -697,6 +675,89 @@ function ClerkProviderWithRoutes({ location }) {
           }
         /> */}
 
+        {/*  TrainScore */}
+
+        <Route
+          path="/trainscore/legacy"
+          element={
+            <>
+              <SignedIn>
+                <Suspense
+                  fallback={
+                    <div className="loading">
+                      <ReactLoading
+                        type="spin"
+                        color="#0083C2"
+                        width={"50px"}
+                        height={"50px"}
+                      />
+                    </div>
+                  }
+                >
+                  <TrainScoreLegacy />
+                </Suspense>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          }
+        />
+
+        <Route
+          path="/trainscore/selftest"
+          element={
+            <>
+              <SignedIn>
+                <Suspense
+                  fallback={
+                    <div className="loading">
+                      <ReactLoading
+                        type="spin"
+                        color="#0083C2"
+                        width={"50px"}
+                        height={"50px"}
+                      />
+                    </div>
+                  }
+                >
+                  <SelfTest />
+                </Suspense>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          }
+        />
+
+        <Route
+          path="/trainscore/monitortest"
+          element={
+            <>
+              <SignedIn>
+                <Suspense
+                  fallback={
+                    <div className="loading">
+                      <ReactLoading
+                        type="spin"
+                        color="#0083C2"
+                        width={"50px"}
+                        height={"50px"}
+                      />
+                    </div>
+                  }
+                >
+                  <MonitorTest />
+                </Suspense>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          }
+        />
+
         {/* Survey */}
         <Route
           path="/survey/subjectSurvey"
@@ -759,7 +820,7 @@ function App() {
       />
       <StatusMobileNav.Provider value={{ statusMenu, setStatusMenu }}>
         <ClerkProvider
-          publishableKey={import.meta.env.VITE_APP_CLERK_PUBLISHABLE_KEY}
+          publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY}
           navigate={(to) => navigate(to)}
         >
           <ClerkProviderWithRoutes location={location} />

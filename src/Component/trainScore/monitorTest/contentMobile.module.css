@@ -1,0 +1,25 @@
+.wrap {
+  /* border: 1px solid #0083c2; */
+  display: flex;
+}
+
+.box {
+  width: 80%;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.point {
+  display: flex;
+  padding: 2px 0px;
+  margin-left: 15px;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+}

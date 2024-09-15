@@ -1,0 +1,130 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin-left: 10px;
+  border-radius: 15px;
+  padding: 20px;
+  gap: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 700px;
+}
+
+.loading {
+  align-self: center;
+}
+
+.wrapTable {
+  border: 1px solid #0083c2;
+  border-radius: 5px;
+}
+
+.wrapHeaderTable {
+  background-color: #c6e0c4;
+}
+
+/* .wrapHeaderTable > tr > th {
+  border: 1px solid #0083c2; 
+} */
+
+.wrapBodyTable > tr > td {
+  /* border-right: 1px solid #0083c2;
+  border-left: 1px solid #0083c2; */
+  padding-left: 5px;
+}
+
+.trTable {
+  line-height: 40px;
+  background-color: rgb(0, 131, 194, 0.03);
+}
+
+.expandBtn {
+  /* margin-right: 10px; */
+  background-color: transparent;
+  border: none;
+}
+
+.tableInput {
+  width: 80px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid black;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+.tdTable {
+  text-align: center;
+}
+
+.titleContent {
+  display: flex;
+}
+
+/* mobile and tablet */
+@media screen and (max-width: 64.0625em) {
+  .wrap {
+    border: none;
+    margin-left: 0;
+    width: calc(100% - 20px);
+    gap: 30px;
+    min-height: 500px;
+    margin-top: 5px;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .titleContent {
+    display: none;
+  }
+
+  .btn {
+    font-size: 10px;
+  }
+  .point {
+    display: grid;
+  }
+
+  .tableInput {
+    width: 40px;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrap {
+    min-height: 835px;
+  }
+}
+
+/* mobile */
+@media screen and (max-width: 46.1875em) {
+}
+
+/* mobile */
+.mobilewrap {
+  margin: 10px;
+}
+.mobilegroup {
+  /* margin-top: 30px; */
+  margin-bottom: 50px;
+}
+.mobilePoint {
+  display: flex;
+  padding-left: 15px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.mobileInput {
+  border-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 80px;
+  padding: 2px;
+}
+
+.question {
+  padding-left: 15px;
+}

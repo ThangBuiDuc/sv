@@ -63,11 +63,11 @@ export const sideBarData = [
       //     path: '/study/scholarship',
       //     icon: <AiOutlineTrophy/>
       // },
-      {
-        title: "Cảnh báo học vụ",
-        path: "/study/warning",
-        icon: <RiErrorWarningLine />,
-      },
+      // {
+      //   title: "Cảnh báo học vụ",
+      //   path: "/study/warning",
+      //   icon: <RiErrorWarningLine />,
+      // },
       {
         title: "Nợ môn",
         path: "/study/owe",
@@ -144,11 +144,11 @@ export const sideBarData = [
     icon: <SlCalender />,
     path: "/calendar",
     subNav: [
-      {
-        title: "Lịch học",
-        path: "/calendar/study",
-        icon: <BsCalendarCheck />,
-      },
+      // {
+      //   title: "Lịch học",
+      //   path: "/calendar/study",
+      //   icon: <BsCalendarCheck />,
+      // },
       {
         title: "Lịch thi",
         path: "/calendar/test",
@@ -174,6 +174,28 @@ export const sideBarData = [
   //     ]
 
   // },
+  {
+    title: "Rèn luyện",
+    icon: <MdOutlineScore />,
+    path: "/trainscore",
+    subNav: [
+      {
+        title: "Điểm rèn luyện",
+        path: "/trainscore/legacy",
+        icon: <MdShowChart />,
+      },
+      {
+        title: "Tự đánh giá",
+        path: "/trainscore/selftest",
+        icon: <BsFillPersonLinesFill />,
+      },
+      {
+        title: "Cán bộ đánh giá",
+        path: "/trainscore/monitortest",
+        icon: <BsFillPersonCheckFill />,
+      },
+    ],
+  },
   {
     title: "Khảo sát",
     icon: <RiSurveyFill />,
