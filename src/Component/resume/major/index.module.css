@@ -1,7 +1,7 @@
 .major {
   display: flex;
   flex-direction: column;
-  width: 75%; /* Rộng */
+  width: 85%; /* Rộng */
   margin-left: 10px;
   border-radius: 15px; /* Bo góc */
   padding: 20px;
@@ -38,7 +38,8 @@
 .labelContent {
   font-family: Montserrat;
   font-size: 15px;
-  height: 15px;
+  height: fit-content;
+  /* padding: 5px; */
   background-color: rgba(217, 217, 217, 0.3);
   border: 1px solid rgba(61, 54, 54, 0.25);
   padding: 5px;

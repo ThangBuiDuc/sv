@@ -1,46 +1,43 @@
-.wrap{
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-    margin-left: 10px;
-    border-radius: 15px;
-    padding: 20px;
-    gap: 50px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    min-height: 700px;
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin-left: 10px;
+  border-radius: 15px;
+  padding: 20px;
+  gap: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 700px;
 }
 
-.wrapHeaderTable{
-    background-color: #0083C2;
-    color: white;
+.wrapHeaderTable {
+  background-color: #0083c2;
+  color: white;
 }
 
-.wrapHeaderTable > tr > th{
-    border: 1px solid #0083C2;
+.wrapHeaderTable > tr > th {
+  border: 1px solid #0083c2;
 }
 
-.wrapBodyTable > tr > td{
-    border-right: 1px solid #0083C2;
-    border-left: 1px solid #0083C2;
+.wrapBodyTable > tr > td {
+  border-right: 1px solid #0083c2;
+  border-left: 1px solid #0083c2;
 }
-
-
-
 
 /* mobile */
-@media screen and (max-width: 64.0625em){
-    .wrap{
-        border: none;
-        margin-left: 0;
-        width: calc(100% - 40px);
-        gap: 30px;
-        min-height: 500px;
-    }
+@media screen and (max-width: 64.0625em) {
+  .wrap {
+    border: none;
+    margin-left: 0;
+    width: calc(100% - 40px);
+    gap: 30px;
+    min-height: 500px;
+  }
 }
 
 /* tablet */
-@media screen and (min-width: 46.25em) and (max-width: 64.0625em){
-    .wrap{
-        min-height: 835px;
-    }
+@media screen and (min-width: 46.25em) and (max-width: 64.0625em) {
+  .wrap {
+    min-height: 835px;
+  }
 }
