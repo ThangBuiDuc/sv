@@ -820,7 +820,7 @@ function App() {
       />
       <StatusMobileNav.Provider value={{ statusMenu, setStatusMenu }}>
         <ClerkProvider
-          publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY}
+          publishableKey={import.meta.env.VITE_APP_CLERK_PUBLISHABLE_KEY}
           navigate={(to) => navigate(to)}
         >
           <ClerkProviderWithRoutes location={location} />

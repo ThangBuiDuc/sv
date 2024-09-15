@@ -270,6 +270,11 @@ export default function SignUp() {
                 Sinh viên chưa đăng ký email với hệ thống, vui lòng liên hệ
                 phòng đào tạo để đăng ký!
               </p>
+            ) : progress ===
+              "Password has been found in an online data breach. For account safety, please use a different password." ? (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                Mật khẩu yếu. Vui lòng thử mật khẩu có cả chữ hoa và chữ số!
+              </p>
             ) : (
               <></>
             )}

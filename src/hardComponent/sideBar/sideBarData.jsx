@@ -15,12 +15,15 @@ import {
   BsCoin,
   BsCalendarCheck,
   BsCalendar2Check,
+  BsFillPersonLinesFill,
+  BsFillPersonCheckFill,
 } from "react-icons/bs";
 import { AiOutlineLineChart, AiOutlineCalendar } from "react-icons/ai";
 // import {AiOutlineTrophy} from 'react-icons/ai'
 import {
   MdAttachMoney,
   MdMoneyOff,
+  MdOutlineScore,
   //MdMoneyOffCsred
 } from "react-icons/md";
 // import { GiMoneyStack } from "react-icons/gi";
