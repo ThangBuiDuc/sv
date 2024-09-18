@@ -35,7 +35,7 @@ export default function Index() {
   }, []);
   useLayoutEffect(() => {
     let callApi = async () => {
-      await fetch(process.env.REACT_APP_REN_LUYEN_BATCH)
+      await fetch(import.meta.env.VITE_APP_REN_LUYEN_BATCH)
         .then((res) => res.json())
         .then((res) => setBatch(res.result[0]));
     };
@@ -44,11 +44,11 @@ export default function Index() {
 
   useEffect(() => {
     let callApi = async () => {
-      await fetch(`${process.env.REACT_APP_REN_LUYEN_ROLE}/${batch?.id}`, {
+      await fetch(`${import.meta.env.VITE_APP_REN_LUYEN_ROLE}/${batch?.id}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${await getToken({
-            template: process.env.REACT_APP_REN_LUYEN_MONITOR,
+            template: import.meta.env.VITE_APP_REN_LUYEN_MONITOR,
           })}`,
         },
       })
@@ -61,12 +61,14 @@ export default function Index() {
   useLayoutEffect(() => {
     let callApi = async () => {
       await fetch(
-        `${process.env.REACT_APP_API_REN_LUYEN_MONITOR}${user.publicMetadata.masv}/${batch?.id}`,
+        `${import.meta.env.VITE_APP_API_REN_LUYEN_MONITOR}${
+          user.publicMetadata.masv
+        }/${batch?.id}`,
         {
           method: "GET",
           headers: {
             authorization: `Bearer ${await getToken({
-              template: process.env.REACT_APP_REN_LUYEN_MONITOR,
+              template: import.meta.env.VITE_APP_REN_LUYEN_MONITOR,
             })}`,
           },
         }
@@ -101,7 +103,7 @@ export default function Index() {
 
   if (
     role === undefined ||
-    role?.role_id.toString() !== process.env.REACT_APP_REN_LUYEN_MONITOR_ROLE
+    role?.role_id.toString() !== import.meta.env.VITE_APP_REN_LUYEN_MONITOR_ROLE
   ) {
     return (
       <div className={style.wrap}>

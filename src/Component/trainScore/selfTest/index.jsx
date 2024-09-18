@@ -26,7 +26,7 @@ export default function Index() {
 
   useLayoutEffect(() => {
     let callApi = async () => {
-      await fetch(process.env.REACT_APP_REN_LUYEN_BATCH)
+      await fetch(import.meta.env.VITE_APP_REN_LUYEN_BATCH)
         .then((res) => res.json())
         .then((res) => setBatch(res.result[0]));
     };
@@ -36,11 +36,11 @@ export default function Index() {
 
   useLayoutEffect(() => {
     let callApi = async () => {
-      await fetch(`${process.env.REACT_APP_REN_LUYEN_SELF}${batch?.id}`, {
+      await fetch(`${import.meta.env.VITE_APP_REN_LUYEN_SELF}${batch?.id}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${await getToken({
-            template: process.env.REACT_APP_REN_LUYEN_SV,
+            template: import.meta.env.VITE_APP_REN_LUYEN_SV,
           })}`,
         },
       })

@@ -83,12 +83,14 @@ export default function Index({
   useEffect(() => {
     let calApi = async () => {
       await fetch(
-        `${process.env.REACT_APP_RL_EDU_TBHK}${user.publicMetadata.masv}/${batch.term}/${batch.school_year}`,
+        `${import.meta.env.VITE_APP_RL_EDU_TBHK}${user.publicMetadata.masv}/${
+          batch.term
+        }/${batch.school_year}`,
         {
           method: "GET",
           headers: {
             authorization: `Bearer ${await getToken({
-              template: process.env.REACT_APP_RL_EDU,
+              template: import.meta.env.VITE_APP_RL_EDU,
             })}`,
           },
         }
@@ -354,12 +356,12 @@ export default function Index({
         showLoaderOnConfirm: () => !Swal.isLoading(),
         preConfirm: async () => {
           let result = await fetch(
-            process.env.REACT_APP_REN_LUYEN_UPDATE_SELF,
+            import.meta.env.VITE_APP_REN_LUYEN_UPDATE_SELF,
             {
               method: "PUT",
               headers: {
                 authorization: `Bearer ${await getToken({
-                  template: process.env.REACT_APP_REN_LUYEN_SV,
+                  template: import.meta.env.VITE_APP_REN_LUYEN_SV,
                 })}`,
               },
               body: JSON.stringify({

@@ -1,5 +1,5 @@
 import { useTable, useSortBy } from "react-table";
-import {useMemo } from "react";
+import { useMemo } from "react";
 import style from "./index.module.css";
 
 function Table({ columns, data }) {
@@ -28,7 +28,13 @@ function Table({ columns, data }) {
                 {...column.getHeaderProps(column.getSortByToggleProps())}
                 style={{ padding: "10px", cursor: "pointer" }}
               >
-                <div style={{ display: "flex",justifyContent:'center', gap : '5px'}}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "5px",
+                  }}
+                >
                   {column.render("Header")}
                   <span>
                     {column.isSorted
@@ -48,7 +54,7 @@ function Table({ columns, data }) {
           prepareRow(row);
           return i % 2 === 0 ? (
             <tr {...row.getRowProps()} style={{ backgroundColor: "#D9E1F2" }}>
-              {row.cells.map((cell,index) => {
+              {row.cells.map((cell, index) => {
                 return (
                   <td
                     {...cell.getCellProps()}
@@ -62,7 +68,7 @@ function Table({ columns, data }) {
             </tr>
           ) : (
             <tr {...row.getRowProps()}>
-              {row.cells.map((cell,index) => {
+              {row.cells.map((cell, index) => {
                 return (
                   <td
                     {...cell.getCellProps()}
@@ -81,7 +87,7 @@ function Table({ columns, data }) {
   );
 }
 
-function SemesterTable({data}) {
+function SemesterTable({ data }) {
   // Tao cot
   const columns = useMemo(
     () => [
@@ -100,11 +106,11 @@ function SemesterTable({data}) {
       {
         Header: "Điểm",
         accessor: "diem",
-      }
+      },
     ],
     []
   );
-  return <Table columns={columns} data={data} />
+  return <Table columns={columns} data={data} />;
 }
 
 export default SemesterTable;

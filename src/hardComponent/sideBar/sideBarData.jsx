@@ -56,11 +56,11 @@ export const sideBarData = [
         path: "/study/avg",
         icon: <GrScorecard />,
       },
-      {
-        title: "Điểm rèn luyện",
-        path: "/study/trainscore",
-        icon: <MdShowChart />,
-      },
+      // {
+      //   title: "Điểm rèn luyện",
+      //   path: "/study/trainscore",
+      //   icon: <MdShowChart />,
+      // },
       // {
       //     title:'Học bổng',
       //     path: '/study/scholarship',
