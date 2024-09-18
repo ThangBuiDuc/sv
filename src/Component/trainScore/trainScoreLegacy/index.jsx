@@ -51,13 +51,15 @@ function TrainScore() {
 
     const fetchData = async () => {
       await fetch(
-        `${process.env.REACT_APP_TRAIN_SCORE_API}${user.publicMetadata.masv}`,
+        `${import.meta.env.VITE_APP_TRAIN_SCORE_API}${
+          user.publicMetadata.masv
+        }`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${await getToken({
-              template: process.env.REACT_APP_EDUMNG_TEMPLATE,
+              template: import.meta.env.VITE_APP_EDUMNG_TEMPLATE,
             })}`,
           },
         }
