@@ -12,7 +12,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-import { useAuth , useUser} from "@clerk/clerk-react";
+import { useAuth, useUser } from "@clerk/clerk-react";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -26,7 +26,7 @@ const CustomTooltip = ({ active, payload }) => {
         }}
       >
         <p>{`${payload[0].payload.semester} năm ${payload[0].payload.year}`}</p>
-        <p >{`Điểm rèn luyện: ${payload[0].payload.score}`}</p>
+        <p>{`Điểm rèn luyện: ${payload[0].payload.score}`}</p>
       </div>
     );
   }
@@ -36,8 +36,8 @@ const CustomTooltip = ({ active, payload }) => {
 
 function TrainScore() {
   const [data, setData] = useState(null);
-  const {getToken} = useAuth();
-  const {user} = useUser();
+  const { getToken } = useAuth();
+  const { user } = useUser();
 
   useLayoutEffect(() => {
     // function interleave(arr, arr2) {
@@ -50,16 +50,23 @@ function TrainScore() {
     // }
 
     const fetchData = async () => {
-      await fetch(`${process.env.REACT_APP_TRAIN_SCORE_API}${user.publicMetadata.masv}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization : `Bearer ${await getToken({template: process.env.REACT_APP_EDUMNG_TEMPLATE})}`
+      await fetch(
+        `${import.meta.env.VITE_APP_TRAIN_SCORE_API}${
+          user.publicMetadata.masv
+        }`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${await getToken({
+              template: import.meta.env.VITE_APP_EDUMNG_TEMPLATE,
+            })}`,
+          },
         }
-      })
+      )
         .then((res) => res.json())
         .then((res) => {
-          setData(res.train_score.length>0?res.train_score.reverse():[])
+          setData(res.train_score.length > 0 ? res.train_score.reverse() : []);
           // let data1, data2;
           // if (res.data.sv_diem_ren_luyen.length > 0) {
           //   data1 = res.data.sv_diem_ren_luyen.filter(
@@ -127,7 +134,7 @@ function TrainScore() {
                       axisLine={false}
                       padding={{ left: 20, right: 40 }}
                       interval={0}
-                      style={{ fontSize: "14px"}}
+                      style={{ fontSize: "14px" }}
                     />
                     <YAxis />
                     <Tooltip content={<CustomTooltip />} />

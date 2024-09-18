@@ -249,12 +249,14 @@ export default function Index({ dataPass, setDataPass, batch }) {
   useEffect(() => {
     let calApi = async () => {
       await fetch(
-        `${process.env.REACT_APP_RL_EDU_TBHK}${dataPass.student_code}/${batch.term}/${batch.school_year}`,
+        `${import.meta.env.VITE_APP_RL_EDU_TBHK}${dataPass.student_code}/${
+          batch.term
+        }/${batch.school_year}`,
         {
           method: "GET",
           headers: {
             authorization: `Bearer ${await getToken({
-              template: process.env.REACT_APP_RL_EDU,
+              template: import.meta.env.VITE_APP_RL_EDU,
             })}`,
           },
         }
@@ -270,12 +272,14 @@ export default function Index({ dataPass, setDataPass, batch }) {
   useEffect(() => {
     let callApi = async () => {
       await fetch(
-        `${process.env.REACT_APP_API_REN_LUYEN_MONITOR_DETAIL}${user.publicMetadata.masv}/${batch?.id}/${dataPass.student_code}`,
+        `${import.meta.env.VITE_APP_API_REN_LUYEN_MONITOR_DETAIL}${
+          user.publicMetadata.masv
+        }/${batch?.id}/${dataPass.student_code}`,
         {
           method: "GET",
           headers: {
             authorization: `Bearer ${await getToken({
-              template: process.env.REACT_APP_REN_LUYEN_MONITOR,
+              template: import.meta.env.VITE_APP_REN_LUYEN_MONITOR,
             })}`,
           },
         }
@@ -525,12 +529,12 @@ export default function Index({ dataPass, setDataPass, batch }) {
         showLoaderOnConfirm: () => !Swal.isLoading(),
         preConfirm: async () => {
           let result = await fetch(
-            process.env.REACT_APP_REN_LUYEN_UPDATE_MONITOR,
+            import.meta.env.VITE_APP_REN_LUYEN_UPDATE_MONITOR,
             {
               method: "PUT",
               headers: {
                 authorization: `Bearer ${await getToken({
-                  template: process.env.REACT_APP_REN_LUYEN_MONITOR,
+                  template: import.meta.env.VITE_APP_REN_LUYEN_MONITOR,
                 })}`,
               },
               body: JSON.stringify({

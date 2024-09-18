@@ -474,6 +474,33 @@ function ClerkProviderWithRoutes({ location }) {
          }
        /> */}
 
+        {/* <Route
+          path="/study/trainscore"
+          element={
+            <>
+              <SignedIn>
+                <Suspense
+                  fallback={
+                    <div className="loading">
+                      <ReactLoading
+                        type="spin"
+                        color="#0083C2"
+                        width={"50px"}
+                        height={"50px"}
+                      />
+                    </div>
+                  }
+                >
+                  <TrainScoreLegacy />
+                </Suspense>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          }
+        /> */}
+
         <Route
           path="/study/warning"
           element={
