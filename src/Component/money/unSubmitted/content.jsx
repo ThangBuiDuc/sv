@@ -74,14 +74,20 @@ function toNonAccentVietnamese(str) {
   return str;
 }
 
-async function createInvoice(invoice, token) {
-  const res = await fetch(import.meta.env.VITE_APP_CREATE_INVOICE, {
-    method: "POST",
-    headers: {
-      "content-type": "Application/json",
-    },
-    body: JSON.stringify({ invoice, token }),
-  });
+async function createInvoice(invoice, token, bank) {
+  console.log(bank);
+  const res = await fetch(
+    bank === "HDBank"
+      ? import.meta.env.VITE_APP_CREATE_INVOICE
+      : import.meta.env.VITE_APP_CREATE_INVOICE_VTBANK,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "Application/json",
+      },
+      body: JSON.stringify({ invoice, token }),
+    }
+  );
 
   if (!res.ok) throw new Error();
 
@@ -187,7 +193,8 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
   // client.query();
 
   const mutation = useMutation({
-    mutationFn: async (data) => createInvoice(data.invoice, data.token),
+    mutationFn: async (data) =>
+      createInvoice(data.invoice, data.token, data.bank),
     onSuccess: (res) => {
       setMutating(false);
       setInvoice(res);
@@ -258,6 +265,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
       };
 
       mutation.mutate({
+        bank: [...value.values()][0],
         invoice,
         token: await getToken({
           template: import.meta.env.VITE_APP_HASURA_PAY_TEMPLATE,
@@ -277,6 +285,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
       };
 
       mutation.mutate({
+        bank: [...value.values()][0],
         invoice,
         token: await getToken({
           template: import.meta.env.VITE_APP_HASURA_PAY_TEMPLATE,
@@ -286,6 +295,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
     // const invoice =
   };
 
+  // console.log([...value.values()][0]);
   // console.log(toNonAccentVietnamese(user.publicMetadata.fullname));
   // console.log(unSubmitted);
   return (
