@@ -8,6 +8,7 @@ import { StatusMobileNav } from "../../App";
 import { useContext } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useClerk, useUser } from "@clerk/clerk-react";
+import formbricks from "@formbricks/js";
 
 function SideBar() {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ function SideBar() {
 
   const handleLogOut = () => {
     signOut();
+    formbricks.logout();
     navigate("/home");
   };
 

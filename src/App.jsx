@@ -26,6 +26,7 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import ReactLoading from "react-loading";
+import formbricks from "@formbricks/js";
 
 //SignIn
 import SignIn from "./hardComponent/signIn";
@@ -35,6 +36,7 @@ import SignUp from "./hardComponent/signUp";
 
 //ForgotPass
 import ResetPass from "./hardComponent/resetPass";
+import { promise } from "zod";
 
 ///////////////////////////////////////////////////////////////////////////// Navigation bar
 const Announcement = React.lazy(() => import("./Component/announcement"));
@@ -57,6 +59,7 @@ const Subject = React.lazy(() => import("./Component/money/subject"));
 //   import("./Component/money/unSubmittedSubSession")
 // );
 // const Dormitory = React.lazy(() => import("./Component/money/dormitory"));
+
 ///////////////////////////////////////////////////////////////////////////////// So yeu ly lich
 const UserInfor = React.lazy(() =>
   import("./Component/resume/userInformation")
@@ -90,12 +93,28 @@ const SubjectSurvey = React.lazy(() =>
 export const StatusMobileNav = createContext();
 
 function Hard() {
-  const { user } = useUser();
+  const { user, isSignedIn, isLoaded } = useUser();
+  const [isSignedInFormBrick, setIsSignedInFormBrick] = useState(isSignedIn);
   if (user && user.emailAddresses[0].emailAddress.includes("@hpu.edu.vn"))
     window.location.href = "https://gv.hpu.edu.vn/home";
+
+  if ((isSignedInFormBrick || isSignedIn) && isLoaded) {
+    // formbricks.reset();
+    if (user.id) {
+      // formbricks.reset();
+      formbricks.init({
+        environmentId: "cm386n0y0002czcb8tkxrdzj2",
+        apiHost: "http://10.1.0.220:3000",
+        userId: user.publicMetadata.masv,
+      });
+      formbricks.setEmail(user.emailAddresses[0].emailAddress);
+      formbricks.setAttribute("name", user.publicMetadata.fullname);
+    }
+  } else console.log("user not signedIn");
+
   return (
     <>
-      <Header />
+      <Header setIsSignedInFormBrick={setIsSignedInFormBrick} />
       <div
         style={{ display: "flex", gap: "10px", padding: "15px" }}
         className={"wrapbody"}

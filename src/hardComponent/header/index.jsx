@@ -8,6 +8,7 @@ import { TfiAnnouncement } from "react-icons/tfi";
 import { StatusMobileNav } from "../../App";
 import { useContext } from "react";
 import { useClerk, useUser } from "@clerk/clerk-react";
+import formbricks from "@formbricks/js";
 
 const headerItem = [
   {
@@ -31,7 +32,7 @@ const headerItem = [
   },
 ];
 
-function Header() {
+function Header({ setIsSignedInFormBrick }) {
   const { isSignedIn, user } = useUser();
   const { signOut } = useClerk();
   const { statusMenu, setStatusMenu } = useContext(StatusMobileNav);
@@ -43,7 +44,9 @@ function Header() {
   };
 
   const handleLogOut = () => {
+    setIsSignedInFormBrick(false);
     signOut();
+    formbricks.logout();
     navigate("/home");
   };
 

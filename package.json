@@ -13,6 +13,7 @@
   "dependencies": {
     "@apollo/client": "^3.10.8",
     "@clerk/clerk-react": "^4.10.0",
+    "@formbricks/js": "^3.0.1",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -52,7 +53,8 @@
     "recharts": "^2.1.16",
     "sonner": "^1.5.0",
     "sweetalert2": "^11.7.3",
-    "vercel": "^34.3.0"
+    "vercel": "^34.3.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
