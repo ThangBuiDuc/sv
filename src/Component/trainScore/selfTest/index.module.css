@@ -144,7 +144,8 @@
   .wrap {
     border: none;
     margin-left: 0;
-    width: calc(100% - 20px);
+    /* width: calc(100% - 20px); */
+    width: 100%;
     gap: 30px;
     min-height: 500px;
     margin-top: 5px;

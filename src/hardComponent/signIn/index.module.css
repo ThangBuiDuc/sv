@@ -13,14 +13,14 @@
 }
 
 .Wrapform {
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border: solid 1px rgb(0 0 0 / 25%);
-    border-radius: 35px;
-    gap: 20px;
-    padding: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: solid 1px rgb(0 0 0 / 25%);
+  border-radius: 35px;
+  gap: 20px;
+  padding: 20px;
+}
 
 .form {
   display: flex;
@@ -62,15 +62,15 @@
   align-self: center;
   background-color: white;
   cursor: pointer;
-  border: 1px solid rgb(0,0,0,0.35);
+  border: 1px solid rgb(0, 0, 0, 0.35);
   border-radius: 15px;
   -webkit-appearance: none;
   color: black;
 }
 
-.submit:hover{
-    background-color: #0083c2;
-    color: white;
+.submit:hover {
+  background-color: #0083c2;
+  color: white;
 }
 
 .loading {
@@ -78,30 +78,28 @@
 }
 
 /* mobile and tablet */
-@media screen and (max-width: 64.0625em)
-{
-  .wrapper{
+@media screen and (max-width: 64.0625em) {
+  .wrapper {
     width: unset;
     align-self: center;
   }
 
-  .imgLogo{
+  .imgLogo {
     width: unset;
   }
 
-  .Wrapform{
+  .Wrapform {
     box-shadow: none;
     border: none;
   }
 
-  .input{
+  .input {
     padding: 10px;
     border-radius: 15px;
   }
 
-  .submit{
+  .submit {
     border-radius: 15px;
     padding: 8px;
   }
-  
 }

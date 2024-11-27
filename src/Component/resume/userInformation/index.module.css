@@ -58,7 +58,9 @@
   .wrapUser {
     border: none;
     margin-left: 0;
-    width: calc(100% - 40px);
+    /* width: calc(100% - 40px); */
+    /* width: calc(100% - 40px);*/
+    width: 100%;
     gap: 30px;
     min-height: 500px;
   }
@@ -110,6 +112,7 @@
   }
 
   .lineItem {
+    /* width: calc(100% - 40px);*/
     width: 100%;
   }
 
