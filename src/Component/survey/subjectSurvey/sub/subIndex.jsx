@@ -210,7 +210,12 @@ export default function SubIndex({ data, setToggle, user, getToken }) {
         >
           <p style={{ fontWeight: "bold" }}>Ý kiến riêng</p>
           <textarea
-            style={{ resize: "none", padding: "10px", borderRadius: "10px" }}
+            style={{
+              resize: "none",
+              padding: "10px",
+              borderRadius: "10px",
+              border: "1px solid rgba(0, 0, 0, 0.1)",
+            }}
             rows="5"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
