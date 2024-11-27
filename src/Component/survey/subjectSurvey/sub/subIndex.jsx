@@ -5,39 +5,38 @@ import { BiArrowBack } from "react-icons/bi";
 import RadioCheckBox from "./radioCheckBox";
 import Swal from "sweetalert2";
 
-
-function Convert(string){
-
-  switch(string){
-    case 'Thạc sỹ':{
-      string = 'ThS';
+function Convert(string) {
+  switch (string) {
+    case "Thạc sỹ": {
+      string = "ThS";
       break;
     }
-    case 'Tiến sỹ':{
-      string = 'TS';
+    case "Tiến sỹ": {
+      string = "TS";
       break;
     }
-    case 'Cử nhân':{
-      string = 'CN';
+    case "Cử nhân": {
+      string = "CN";
       break;
     }
-    case 'Kỹ sư':{
-      string = 'KS';
+    case "Kỹ sư": {
+      string = "KS";
       break;
     }
-    case 'Phó giáo sư':{
-      string = 'PGS';
+    case "Phó giáo sư": {
+      string = "PGS";
       break;
     }
-    case 'Giáo sư':{
-      string = 'GS';
+    case "Giáo sư": {
+      string = "GS";
       break;
     }
-    case 'Tiến sỹ khoa học':{
-      string = 'TSKH';
+    case "Tiến sỹ khoa học": {
+      string = "TSKH";
       break;
     }
-    default: string = '';
+    default:
+      string = "";
   }
   return string;
 }
@@ -150,6 +149,7 @@ export default function SubIndex({ data, setToggle, user, getToken }) {
             sbj_code: subject_code,
             hk: hocky,
             namhoc: namhoc,
+            $clss_code: class_code,
           }),
         }
       )
@@ -179,13 +179,13 @@ export default function SubIndex({ data, setToggle, user, getToken }) {
         gap: "20px",
       }}
     >
-      <label onClick={() => setToggle(false)} style={{cursor:'pointer'}}>
+      <label onClick={() => setToggle(false)} style={{ cursor: "pointer" }}>
         <BiArrowBack size={"40"} />
       </label>
       <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
         <div
           style={{
-            flexDirection:'column',
+            flexDirection: "column",
             display: "flex",
             justifyContent: "center",
             fontWeight: "bold",
@@ -194,7 +194,9 @@ export default function SubIndex({ data, setToggle, user, getToken }) {
           className={style.subTitle}
         >
           <p>{data.class_name}</p>
-          <p style={{textAlign:'right',color:'#0083C2'}}>{Convert(data.hoc_vi)} {data.teacher_name}</p>
+          <p style={{ textAlign: "right", color: "#0083C2" }}>
+            {Convert(data.hoc_vi)} {data.teacher_name}
+          </p>
         </div>
         <div
           style={{
