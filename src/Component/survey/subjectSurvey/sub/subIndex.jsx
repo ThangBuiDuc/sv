@@ -149,7 +149,7 @@ export default function SubIndex({ data, setToggle, user, getToken }) {
             sbj_code: subject_code,
             hk: hocky,
             namhoc: namhoc,
-            $clss_code: class_code,
+            clss_code: class_code,
           }),
         }
       )
