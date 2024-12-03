@@ -115,7 +115,11 @@ function GroupQuestion({
                     <p className={style.sv}>{questionItem.self_point}</p>
                   ) : (
                     <input
-                      style={{ width: "50px" }}
+                      style={{
+                        width: "50px",
+                        border: "1px black solid",
+                        borderRadius: "5px",
+                      }}
                       type="number"
                       value={
                         typeof questionItem.self_point === "number"
