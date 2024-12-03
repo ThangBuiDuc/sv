@@ -115,6 +115,7 @@ function GroupQuestion({
                     <p className={style.sv}>{questionItem.self_point}</p>
                   ) : (
                     <input
+                      placeholder="Nhập điểm"
                       style={{
                         width: "50px",
                         border: "1px black solid",
