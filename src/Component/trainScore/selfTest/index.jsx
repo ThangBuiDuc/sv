@@ -182,7 +182,7 @@ export default function Index() {
                         name: item.detail_question.name,
                         max_point: item.detail_question.max_point,
                         position: item.detail_question.position,
-                        self_point: item.question_point.point,
+                        self_point: item.question_point[0].point,
                         monitor_point: null,
                         staff_point: null,
                       };
