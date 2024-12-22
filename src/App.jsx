@@ -15,6 +15,7 @@ import React, {
   useState,
   createContext,
   useLayoutEffect,
+  useEffect,
 } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,7 +37,6 @@ import SignUp from "./hardComponent/signUp";
 
 //ForgotPass
 import ResetPass from "./hardComponent/resetPass";
-import { promise } from "zod";
 
 ///////////////////////////////////////////////////////////////////////////// Navigation bar
 const Announcement = React.lazy(() => import("./Component/announcement"));
@@ -94,27 +94,31 @@ export const StatusMobileNav = createContext();
 
 function Hard() {
   const { user, isSignedIn, isLoaded } = useUser();
-  const [isSignedInFormBrick, setIsSignedInFormBrick] = useState(isSignedIn);
   if (user && user.emailAddresses[0].emailAddress.includes("@hpu.edu.vn"))
     window.location.href = "https://gv.hpu.edu.vn/home";
 
-  if ((isSignedInFormBrick || isSignedIn) && isLoaded) {
-    // formbricks.reset();
-    if (user.id) {
-      // formbricks.reset();
-      formbricks.init({
-        environmentId: "cm386n0y0002czcb8tkxrdzj2",
-        apiHost: "http://10.1.0.220:3000",
-        userId: user.publicMetadata.masv,
-      });
-      formbricks.setEmail(user.emailAddresses[0].emailAddress);
-      formbricks.setAttribute("name", user.publicMetadata.fullname);
-    }
-  } else console.log("user not signedIn");
+  useEffect(() => {
+    const formBrick = setTimeout(() => {
+      if (isSignedIn && isLoaded && typeof window !== "undefined") {
+        // formBricks.reset();
+        formbricks.init({
+          environmentId: "cm38umyti000311d8xn4ormhe",
+          apiHost: "https://app.formbricks.com",
+          userId: user.publicMetadata.masv,
+        });
+        formbricks.setEmail(user.emailAddresses[0].emailAddress);
+        formbricks.setAttribute("name", user.publicMetadata.fullname);
+      }
+    }, 500);
+    return () => {
+      clearTimeout(formBrick);
+    };
+  }, [isSignedIn, isLoaded, window]);
+  // console.log(signedOutFormBrick);
 
   return (
     <>
-      <Header setIsSignedInFormBrick={setIsSignedInFormBrick} />
+      <Header />
       <div
         style={{ display: "flex", gap: "10px", padding: "15px" }}
         className={"wrapbody"}

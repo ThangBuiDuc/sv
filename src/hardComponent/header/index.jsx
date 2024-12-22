@@ -3,12 +3,13 @@ import logo from "../../img/logo.png";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import { HiOutlineHome, HiOutlineAnnotation } from "react-icons/hi";
+import { HiOutlineHome } from "react-icons/hi";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { StatusMobileNav } from "../../App";
 import { useContext } from "react";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import formbricks from "@formbricks/js";
+import { RiSurveyLine } from "react-icons/ri";
 
 const headerItem = [
   {
@@ -22,9 +23,9 @@ const headerItem = [
     icon: <TfiAnnouncement />,
   },
   {
-    title: "Hỏi đáp",
-    path: "/qanda",
-    icon: <HiOutlineAnnotation />,
+    title: "Khảo sát",
+    path: "/survey",
+    icon: <RiSurveyLine />,
   },
   {
     title: "Menu",
@@ -32,19 +33,20 @@ const headerItem = [
   },
 ];
 
-function Header({ setIsSignedInFormBrick }) {
+function Header() {
   const { isSignedIn, user } = useUser();
   const { signOut } = useClerk();
   const { statusMenu, setStatusMenu } = useContext(StatusMobileNav);
   const location = useLocation();
   const navigate = useNavigate();
 
+  // console.log(isSignedIn);
+
   const handleLogIn = () => {
     window.location.href = "/sign-in";
   };
 
   const handleLogOut = () => {
-    setIsSignedInFormBrick(false);
     signOut();
     formbricks.logout();
     navigate("/home");
@@ -103,85 +105,111 @@ function Header({ setIsSignedInFormBrick }) {
         )}
       </div>
       <div className={style.navBar}>
-        {headerItem.map((item, index) => {
-          return item.title === "Menu" ? (
-            statusMenu ? (
-              <div style={{ borderBottom: "5px solid #0083C2" }} key={index}>
-                <label
-                  htmlFor="modal"
-                  className={style.navMobile}
-                  id={"navMobile"}
-                  style={{ cursor: "pointer" }}
-                  // onClick={() => {
-                  //   setStatusMenu(!statusMenu);
-                  // }}
+        {headerItem
+          .reduce(
+            (total, item) =>
+              isSignedIn
+                ? [...total, item]
+                : item.path === "/survey"
+                ? total
+                : [...total, item],
+            []
+          )
+          .map((item, index) => {
+            return item.title === "Menu" ? (
+              statusMenu ? (
+                <div style={{ borderBottom: "5px solid #0083C2" }} key={index}>
+                  <label
+                    htmlFor="modal"
+                    className={style.navMobile}
+                    id={"navMobile"}
+                    style={{ cursor: "pointer" }}
+                    // onClick={() => {
+                    //   setStatusMenu(!statusMenu);
+                    // }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      {item.icon}
+                    </div>
+                    <p className="font-semibold">{item.title}</p>
+                  </label>
+                </div>
+              ) : (
+                <div key={index}>
+                  <label
+                    htmlFor="modal"
+                    className={style.navMobile}
+                    style={{ cursor: "pointer" }}
+                    // onClick={() => {
+                    //   setStatusMenu(!statusMenu);
+                    // }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      {item.icon}
+                    </div>
+                    <p className="font-semibold">{item.title}</p>
+                  </label>
+                </div>
+              )
+            ) : item.path === "/survey" ? (
+              <div key={index}>
+                <button
+                  id="survey"
+                  className={`${style.navLink} survey w-full`}
+                  onClick={() => {
+                    // console.log(1);
+                    formbricks.track("survey");
+                  }}
                 >
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     {item.icon}
                   </div>
                   <p className="font-semibold">{item.title}</p>
-                </label>
+                </button>
+              </div>
+            ) : "/" + location.pathname.split("/")[1] === item.path &&
+              statusMenu === false ? (
+              <div style={{ borderBottom: "5px solid #0083C2" }} key={index}>
+                <Link
+                  to={item.path}
+                  className={style.navLink}
+                  onClick={() => {
+                    // console.log("clicked");
+                    document.getElementById("modal").checked = false;
+                    setStatusMenu(false);
+                    document.body.scrollTop = 0; // For Safari
+                    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                    document.body.style.overflow = "unset";
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    {item.icon}
+                  </div>
+                  <p className="font-semibold">{item.title}</p>
+                </Link>
               </div>
             ) : (
               <div key={index}>
-                <label
-                  htmlFor="modal"
-                  className={style.navMobile}
-                  style={{ cursor: "pointer" }}
-                  // onClick={() => {
-                  //   setStatusMenu(!statusMenu);
-                  // }}
+                <Link
+                  to={item.path}
+                  className={style.navLink}
+                  onClick={() => {
+                    setStatusMenu(false);
+                    document.getElementById("modal").checked = false;
+                    setStatusMenu(false);
+                    document.body.scrollTop = 0; // For Safari
+                    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                    document.body.style.overflow = "unset";
+                  }}
                 >
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     {item.icon}
                   </div>
                   <p className="font-semibold">{item.title}</p>
-                </label>
+                </Link>
               </div>
-            )
-          ) : "/" + location.pathname.split("/")[1] === item.path &&
-            statusMenu === false ? (
-            <div style={{ borderBottom: "5px solid #0083C2" }} key={index}>
-              <Link
-                to={item.path}
-                className={style.navLink}
-                onClick={() => {
-                  // console.log("clicked");
-                  document.getElementById("modal").checked = false;
-                  setStatusMenu(false);
-                  document.body.scrollTop = 0; // For Safari
-                  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-                  document.body.style.overflow = "unset";
-                }}
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  {item.icon}
-                </div>
-                <p className="font-semibold">{item.title}</p>
-              </Link>
-            </div>
-          ) : (
-            <div key={index}>
-              <Link
-                to={item.path}
-                className={style.navLink}
-                onClick={() => {
-                  setStatusMenu(false);
-                  document.getElementById("modal").checked = false;
-                  setStatusMenu(false);
-                  document.body.scrollTop = 0; // For Safari
-                  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-                  document.body.style.overflow = "unset";
-                }}
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  {item.icon}
-                </div>
-                <p className="font-semibold">{item.title}</p>
-              </Link>
-            </div>
-          );
-        })}
+            );
+          })}
         {/* <label className={style.navMobile}>{<FaBars/>}</label> */}
       </div>
     </div>
