@@ -186,7 +186,20 @@ export default function Index({
   total_self_point,
   total_staff_point,
 }) {
-  const [data, setData] = useState(group);
+  const [data, setData] = useState(
+    total_self_point
+      ? group.map((item) => {
+          let group_point = item.question.reduce((total, curr) => {
+            return total + curr.self_point;
+          }, 0);
+
+          return {
+            ...item,
+            self_point: group_point,
+          };
+        })
+      : group
+  );
   const { getToken } = useAuth();
   const { user } = useUser();
 
