@@ -10,11 +10,11 @@ function Announcement() {
     fetch("/api/announce")
       .then((res) => res.json())
       .then((res) => {
-        const reverse = res.data1.article.reverse();
+        const reverse = res.data1.articles.reverse();
         setBlog(reverse);
       });
   }, []);
-  
+
   return (
     <div className={style.wrapper}>
       {blog.length > 0 ? (
@@ -23,7 +23,7 @@ function Announcement() {
             return (
               <div className={style.article}>
                 <img src={item.image ? item.image.src : noIMG} alt="" />
-                <div style={{width:'100%'}}>
+                <div style={{ width: "100%" }}>
                   <a
                     href={`https://hpu.edu.vn/blogs/thong-bao/${item.handle}`}
                     style={{ textDecoration: "none" }}
