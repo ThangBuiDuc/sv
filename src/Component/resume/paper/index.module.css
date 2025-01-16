@@ -31,6 +31,7 @@
   /* margin-top: -10%;
     margin-left: -10%; */
   flex-direction: column;
+  /* width: calc(100% - 40px);*/
   width: 100%;
   color: #0083c2;
 }
@@ -59,7 +60,8 @@
   .wrapPaper {
     border: none;
     margin-left: 0;
-    width: calc(100% - 40px);
+    /* width: calc(100% - 40px);*/
+    width: 100%;
     gap: 30px;
     min-height: 500px;
   }

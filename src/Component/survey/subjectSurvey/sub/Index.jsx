@@ -117,7 +117,7 @@ export default function Index({ hocky, namhoc }) {
                           textAlign: "center",
                         }}
                       >
-                        {item.status ? "Chưa phản hồi!" : "Đã đánh giá!"}
+                        {item.status ? "Đã phản hồi!" : "Chưa phản hồi!"}
                       </p>
                       {item.status ? (
                         <p
