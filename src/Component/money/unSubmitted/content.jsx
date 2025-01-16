@@ -120,7 +120,7 @@ async function getBank() {
   return res.json();
 }
 
-const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
+const Handle = ({ bank, unSubmitted, hocky, isRefetching, monHoc }) => {
   const client = useQueryClient();
   const { user } = useUser();
   const { getToken } = useAuth();
@@ -364,7 +364,21 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching }) => {
             {unSubmitted.map((item, index) => (
               <TableRow key={item.maKhoanThu.trim()}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{item.khoan_thu.Ten.trim()}</TableCell>
+                <TableCell>
+                  {item.khoan_thu.Ten.trim()}{" "}
+                  {item.maKhoanThu.trim() === "HP"
+                    ? `(${monHoc
+                        .map(
+                          (el) =>
+                            `${
+                              el.loptinchi.monhoc.TenMonHoc
+                            }: ${numberWithCommas(
+                              el.HocPhi - el.soTienDaNop
+                            )} đồng`
+                        )
+                        .join("; ")})`
+                    : ""}
+                </TableCell>
                 {/* <TableCell>{numberWithCommas(item.soTienQuyDinh)}</TableCell> */}
                 {/* <TableCell>{numberWithCommas(item.SoTienThayDoi)}</TableCell>
                 <TableCell>{numberWithCommas(item.soTienMienGiam)}</TableCell>
@@ -508,12 +522,15 @@ const Content = () => {
   if (unSubmitted.isError || bank.isError)
     return <h5 className="text-center">Đã có lỗi xảy ra. Vui lòng thử lại!</h5>;
 
-  // console.log(unSubmitted.data.hocky);
+  // console.log(unSubmitted.data);
   return (
     <Handle
       isRefetching={unSubmitted.isRefetching}
       hocky={unSubmitted.data.hocky}
       bank={bank.data.results}
+      monHoc={unSubmitted.data.monHoc.filter(
+        (item) => item.HocPhi - item.soTienDaNop > 0
+      )}
       unSubmitted={unSubmitted.data.khoan
         .reduce(
           (total, curr) => [
