@@ -252,7 +252,7 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching, monHoc }) => {
               : total,
           0
         ),
-        transactionDescription: `${
+        transactionDescription: `HPU ${
           user.publicMetadata.masv
         } ${toNonAccentVietnamese(user.publicMetadata.fullname)}`,
         EduTransactionDescription: invoice_detail
