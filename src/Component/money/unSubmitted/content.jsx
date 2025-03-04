@@ -94,9 +94,23 @@ async function createInvoice(invoice, token, bank) {
   return res.json();
 }
 
-async function getUnSubmitted(token) {
-  const res = await fetch(import.meta.env.VITE_APP_API_UNSUBMITTED, {
+async function getPresent() {
+  const res = await fetch(import.meta.env.VITE_APP_HPU_PAY_PRESENT, {
     method: "GET",
+    headers: {
+      "content-type": "Application/json",
+    },
+  });
+
+  if (!res.ok) throw new Error();
+
+  return res.json();
+}
+
+async function getUnSubmitted(token, where) {
+  const res = await fetch(import.meta.env.VITE_APP_API_UNSUBMITTED, {
+    method: "POST",
+    body: JSON.stringify({ where }),
     headers: {
       "content-type": "Application/json",
       authorization: `Bearer ${token}`,
@@ -500,14 +514,30 @@ const Handle = ({ bank, unSubmitted, hocky, isRefetching, monHoc }) => {
 };
 const Content = () => {
   const { getToken } = useAuth();
+  const present = useQuery({
+    queryKey: ["hpu_pay_present"],
+    queryFn: async () => getPresent(),
+  });
+
+  // console.log(present.data.present);
+
   const unSubmitted = useQuery({
     queryKey: ["unsubmited"],
     queryFn: async () =>
       getUnSubmitted(
         await getToken({
           template: import.meta.env.VITE_APP_HASURA_PAY_TEMPLATE,
-        })
+        }),
+        {
+          hocKy: {
+            _in: [present.data.present[0].HocKy, -1],
+          },
+          namHoc: {
+            _eq: present.data.present[0].MaNamHoc,
+          },
+        }
       ),
+    enabled: present.isSuccess > 0,
   });
   const bank = useQuery({ queryKey: ["bank"], queryFn: () => getBank() });
 
